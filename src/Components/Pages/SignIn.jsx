@@ -33,26 +33,27 @@ export default function SignInSide() {
 
     // main form data to used for the axios to traverse.
     const [formDetails, setFormDetails] = useState({
-      email:"",
+      Username:"",
       password:""
     });
 
   const handleSubmit = (event) => {
 
     event.preventDefault();
-    const newobj = {...formDetails}
-    const data = new FormData(event.currentTarget);
 
-    newobj.email = data.get('email');
-    newobj.password = data.get('password');
+    const newobj = {...formDetails} // copying prev properties to newobj.
+    const data = new FormData(event.currentTarget); //makes a new obj refer mdn for currentEVENT.
 
-    setFormDetails((prev)=>newobj);
+    newobj.Username = data.get('Username');
+    newobj.password = data.get('password');   // then making changes to newobj.
 
+    setFormDetails((prev)=>newobj);   // setting newobj with new props.
+
+    console.log(newobj);
     // console.log({
-    //   email: data.get('email'),
+    //   Username: data.get('Username'),
     //   password: data.get('password'),
     // });
-    console.log(newobj);
   };
 
   return (
@@ -96,10 +97,10 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="Username"
+                label="Username "
+                name="Username"
+                autoComplete="Username"
                 autoFocus
               />
               <TextField
