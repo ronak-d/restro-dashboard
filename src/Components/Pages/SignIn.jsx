@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -31,11 +32,27 @@ const theme = createTheme();
 // whole signIn component.
 export default function SignInSide() {
 
-    // main form data to used for the axios to traverse.
-    const [formDetails, setFormDetails] = useState({
-      Username:"",
-      password:""
-    });
+  // main form data to used for the axios to traverse.
+  const [formDetails, setFormDetails] = useState({
+    Username:"",
+    password:""
+  });
+  
+  // UseEffect as for changing in formdetails it traverse in the data of api.
+  React.useEffect(() =>{
+    axios.get("https://api.airtable.com/v0/appjWdL7YgpxIxCKA/credenitals?maxRecords=3&view=Grid%20view",{
+      headers: {
+        'Authorization':'Bearer keyfXgn8PL6pB3x32',
+			}
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((err)=>console.log(err.response.data.error.message));
+    
+  },[formDetails]);
+
+
 
   const handleSubmit = (event) => {
 
