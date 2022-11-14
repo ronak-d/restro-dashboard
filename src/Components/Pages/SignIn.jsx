@@ -12,6 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
 
 function Copyright(props) {
   return (
@@ -25,17 +26,33 @@ function Copyright(props) {
     </Typography>
   )
 }
-
 const theme = createTheme();
 
+// whole signIn component.
 export default function SignInSide() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+
+    // main form data to used for the axios to traverse.
+    const [formDetails, setFormDetails] = useState({
+      email:"",
+      password:""
     });
+
+  const handleSubmit = (event) => {
+
+    event.preventDefault();
+    const newobj = {...formDetails}
+    const data = new FormData(event.currentTarget);
+
+    newobj.email = data.get('email');
+    newobj.password = data.get('password');
+
+    setFormDetails((prev)=>newobj);
+
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
+    console.log(newobj);
   };
 
   return (
