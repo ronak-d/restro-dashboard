@@ -23,7 +23,7 @@ function Copyright(props) {
       {new Date().getFullYear()}
       {'.'}
     </Typography>
-  )
+  );
 }
 
 const theme = createTheme();
